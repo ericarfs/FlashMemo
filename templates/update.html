@@ -1,0 +1,25 @@
+{%extends 'base.html'%}
+
+{% block head %} 
+
+{%endblock%}
+
+{% block body %} 
+<h1> <a href="/"> Flash Memo </a></h1>
+<h4> Updating your card </h4>
+<main>
+    <section>
+        <form action='/update/{{card.id}}' method= "POST">
+            <label> Expression:  </label> 
+            <input name = "expression" id = "expression" value= "{{card.expression}}" required></br>
+            <label> Meaning:  </label> 
+            <input name = "meaning" id = "meaning" value= "{{card.meaning}}" required> </br>
+            <label> Example:  </label>
+            <input name = "example" id = "example" value= "{{card.example}}"> </br>
+            <span class="error">{{card_error}}</span>
+            <input type = "submit" class='btn' value = "Update card">
+        </form>
+    </section>
+</main>   
+
+{%endblock%}

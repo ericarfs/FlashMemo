@@ -1,0 +1,25 @@
+{%extends 'base.html'%}
+
+{% block head %} 
+
+{%endblock%}
+
+{% block body %} 
+<h1> <a href="/"> Flash Memo </a></h1>
+<h4> Adding new card </h4>
+<main>
+    <section>
+        <form action='/new_card' method= "POST">
+            <label> Expression:  </label> 
+            <input name = "expression" id = "expression" required></br>
+            <label> Meaning:  </label> 
+            <input name = "meaning" id = "meaning" required>  </br>
+            <label> Example:  </label>
+            <input name = "example" id = "example"> </br>
+            <span class="error">{{card_error}}</span>
+            <input type = "submit" class='btn' value = "Add card">
+        </form>
+    </section>
+</main>   
+
+{%endblock%}
