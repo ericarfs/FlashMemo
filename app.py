@@ -1,14 +1,17 @@
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-import uuid
+from os import environ
+
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DB_URL')
 db = SQLAlchemy(app)
 app.app_context().push()
 
 class FlashCard(db.Model):
-    id           = db.Column(db.String(200), primary_key=True)
+    __tablename__ = 'flashcards'
+
+    id           = db.Column(db.Integer, primary_key=True)
     expression   = db.Column(db.String(200), nullable=False)
     meaning      = db.Column(db.String(200), nullable=False)
     example      = db.Column(db.String(200), nullable=True)
@@ -17,6 +20,7 @@ class FlashCard(db.Model):
     def __repr__(self):
         return '<FlashCard %r> % self.id'
 
+db.create_all()
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
@@ -25,14 +29,23 @@ def index():
 
 @app.route('/new_card', methods=['POST', 'GET'])
 def new_card():
-    card_error = ""
+    card_error = {}
     if request.method == 'POST':
         card_expression = request.form['expression']
         card_meaning = request.form['meaning']
         card_example = request.form['example']
 
-        card_id = uuid.UUID(str(uuid.uuid4())).hex
-        new_card = FlashCard(id = card_id, expression=card_expression, meaning=card_meaning, example =card_example)
+        if len(card_expression) > 200:
+            card_error["expression"] = "Expression should be up to 200 characters!"
+        if len(card_meaning) > 200:
+            card_error["meaning"] = "Expression meaning should be up to 200 characters!"
+        if len(card_example) > 200:
+            card_error["example"] = "Expression example should be up to 200 characters!"
+        
+        if len(card_expression) > 200 or len(card_meaning) > 200 or len(card_example) > 200:
+            return render_template('new_card.html', card_error=card_error)
+
+        new_card = FlashCard(expression=card_expression, meaning=card_meaning, example =card_example)
             
         try:
             db.session.add(new_card)
@@ -56,21 +69,43 @@ def delete(id):
 
 
 
-@app.route('/update/<id>', methods=['POST', 'GET'])
+@app.route('/update/<int:id>', methods=['POST', 'GET'])
 def update(id):
     card = FlashCard.query.get_or_404(id)
+    card_error = {}
+
     if request.method == 'POST':
         card.expression = request.form['expression']
         card.meaning = request.form['meaning']
         card.example = request.form['example']
+
+
+        if len(card.expression) > 200:
+            card_error["expression"] = "Expression should be up to 200 characters!"
+        if len(card.meaning) > 200:
+            card_error["meaning"] = "Expression meaning should be up to 200 characters!"
+        if len(card.example) > 200:
+            card_error["example"] = "Expression example should be up to 200 characters!"
         
+        context = {
+            'card': card,
+            'card_error':card_error,
+        }
+
+        if len(card.expression) > 200 or len(card.meaning) > 200 or len(card.example) > 200:
+            return render_template('update.html', context=context)
+
         try:
             db.session.commit()
             return redirect('/')
         except:
            return 'There was an issue updating that card'
     else:
-        return render_template('update.html', card=card)
+        context = {
+            'card': card,
+            'card_error':card_error,
+        }
+        return render_template('update.html', context=context)
 
 
 if __name__ == "__main__":

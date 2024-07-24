@@ -63,7 +63,7 @@ form input{
     border-radius: 10px;
     padding-left: 10px;
     resize:none; 
-    margin: 5px 0 10px 0;
+    margin-top: 5px;
 }
 
 button{
@@ -75,7 +75,6 @@ button{
 
 p{
     width: 100%;
-    background-color: antiquewhite;
     margin: 0 5px;
 }
 
@@ -133,9 +132,9 @@ p{
     align-items: center;
     gap: 12px;
     transition: all 0.25s ease-in;
-  }
+}
   
-  .carousel-view .item-list {
+.carousel-view .item-list {
     max-width: 950px;
     width: 71vw;
     padding: 20px 40px;
@@ -148,22 +147,22 @@ p{
     overflow-x: auto;
     scroll-snap-type: x mandatory;
 
-  }
+}
   
   
   /* Hide scrollbar for Chrome, Safari and Opera */
-  .item-list::-webkit-scrollbar {
+.item-list::-webkit-scrollbar {
     display: none;
-  }
+}
   
-  .prev-btn {
+.prev-btn {
     background: none;
     cursor: pointer;
-  }
+}
   
-  .next-btn {
+.next-btn {
     cursor: pointer;
-  }
+}
 
 
 .flashcard {
@@ -204,7 +203,9 @@ p{
     backface-visibility: hidden;
     background-color: white ;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
+    gap: 12px;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -225,7 +226,12 @@ p{
 
 }
 
+#example{
+    color: black;
+}
+
 .error{
     font-weight: bold;
+    font-size: 0.6rem;
     color: red;
 }

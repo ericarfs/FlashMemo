@@ -23,10 +23,14 @@
                         {%for card in cards%}
                         <div>
                             <div class="flashcard" id={{loop.index0}}  onclick="flipCard(this)">
-                                <div class="front-face" id="frontface-1">
-                                    <i>{{card.meaning}}</i> 
+                                <div class="front-face" id="frontface-{{loop.index0}}">
+                                    <div>
+                                        <i>{{card.meaning}}</i>
+                                    </div>
                                     {%if card.example != "" %}
+                                    <div id="example">
                                         "{{card.example}}"
+                                    </div>
                                     {%endif%}
                                 </div>
                                 <div class="back-face" >

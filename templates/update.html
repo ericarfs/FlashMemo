@@ -9,14 +9,16 @@
 <h4> Updating your card </h4>
 <main>
     <section>
-        <form action='/update/{{card.id}}' method= "POST">
+        <form action='/update/{{context.card.id}}' method= "POST">
             <label> Expression:  </label> 
-            <input name = "expression" id = "expression" value= "{{card.expression}}" required></br>
+            <input name = "expression" id = "expression" value= "{{context.card.expression}}" required></br>
+            <span class="error">{{context.card_error.expression}}</span></br>
             <label> Meaning:  </label> 
-            <input name = "meaning" id = "meaning" value= "{{card.meaning}}" required> </br>
+            <input name = "meaning" id = "meaning" value= "{{context.card.meaning}}" required> </br>
+            <span class="error">{{context.card_error.meaning}}</span></br>
             <label> Example:  </label>
-            <input name = "example" id = "example" value= "{{card.example}}"> </br>
-            <span class="error">{{card_error}}</span>
+            <input name = "example" id = "example" value= "{{context.card.example}}"> </br>
+            <span class="error">{{context.card_error.example}}</span></br>
             <input type = "submit" class='btn' value = "Update card">
         </form>
     </section>
