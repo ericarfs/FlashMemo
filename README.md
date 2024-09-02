@@ -1,6 +1,8 @@
 # Flashcards application
 
-![Alt text](https://github.com/ericarfs/FlashMemo/blob/master/static/flahsmemo.png?raw=true)
+![Alt text](https://github.com/ericarfs/FlashMemo/blob/master/static/flashmemo.png?raw=true)
+![Alt text](https://github.com/ericarfs/FlashMemo/blob/master/static/addcard.png?raw=true)
+![Alt text](https://github.com/ericarfs/FlashMemo/blob/master/static/updatecard.png?raw=true)
 
 ## Project description
 
