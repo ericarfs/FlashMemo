@@ -1,5 +1,7 @@
 # Flashcards application
 
+![Alt text](https://github.com/ericarfs/FlashMemo/blob/master/static/flahsmemo.png?raw=true)
+
 ## Project description
 
 The project consists of a simple web application for creating flashcards to study languages.
