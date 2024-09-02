@@ -19,7 +19,7 @@ The system must allow users to:
 
 ## Quick start
 
-To run it using Docker:
+To run:
 ```
 docker compose up
 ```
